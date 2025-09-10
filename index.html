@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Carousel</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Fullscreen GIF -->
+    <div class="background">
+      <img src="Park.gif" alt="carousel gif" />
+    </div>
+
+    <!-- Semi-transparent overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Bottom content area -->
+    <div class="bottom-panel">
+      <div class="text-box">
+        <h1>Playground Memory</h1>
+        <p>
+          A soft recollection of childhood carousels, pastel colors, and quiet
+          moments.
+        </p>
+
+        <!-- 年份选择栏和按钮分开 -->
+        <div class="controls">
+          <label for="year">Choose a year:</label>
+          <select id="year">
+            <option value="2008">2008</option>
+            <option value="2010">2010</option>
+            <option value="2012" selected>2012</option>
+            <option value="2014">2014</option>
+            <option value="2016">2016</option>
+          </select>
+        </div>
+
+        <!-- 新增：右侧独立圆形按钮 -->
+        <div class="listen-container">
+          <button id="listenButton" aria-label="Listen">🎧</button>
+        </div>
+
+        <div class="nav">
+          <button class="nav-btn">&larr;</button>
+          <button class="nav-btn">&rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
