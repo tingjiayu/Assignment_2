@@ -10,28 +10,7 @@
 
   <body>
     <div class="background">
-      <img src="Park.gif" alt="carousel gif" />
-      <!-- 底层：始终清晰的 GIF -->
-      <img class="bg-clear" src="Park.gif" alt="carousel gif" />
-
-      <!-- 顶层：被模糊的 GIF（会被mask挖洞） -->
-      <img class="bg-blur" id="blurLayer" src="Park.gif" alt="blurred gif" />
-
-      <!-- SVG 掩膜：往里面append黑圆 = 在模糊层挖洞 -->
-      <svg width="0" height="0" aria-hidden="true">
-        <mask
-          id="revealMask"
-          maskUnits="userSpaceOnUse"
-          maskContentUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-        >
-          <!-- 先全白 = 模糊层全部可见；添加黑圆 = 那些区域隐藏模糊，露出清晰底图 -->
-          <rect x="0" y="0" width="100%" height="100%" fill="white" />
-        </mask>
-      </svg>
+      <img src="Park.gif" alt="Park" />
     </div>
 
     <div class="overlay" id="overlay"></div>
