@@ -1,15 +1,64 @@
-const listenBtn = document.getElementById("listenButton");
+const bgmPlayer = new Tone.Player({
+  url: "childmemory.wav",
+  loop: true,
+  autostart: false,
+}).toDestination();
+
+const clickPlayer = new Tone.Player({
+  url: "turnonmusic.wav",
+  loop: false,
+  autostart: false,
+}).toDestination();
+
 const overlay = document.getElementById("overlay");
-const yearSelect = document.getElementById("yearSelect");
+const listenButton = document.getElementById("listenButton");
 
-listenBtn.addEventListener("click", () => {
-  overlay.classList.add("fade-out");
+let isFullClear = false;
+let isBgmPlaying = false;
 
-  const selectedYear = yearSelect.value;
-  console.log("Selected year:", selectedYear);
+document.body.addEventListener("click", async (e) => {
+  if (isFullClear) return;
 
-  // 示例：可在这里根据年份切换背景/音效等
-  // if (selectedYear === "2012") {
-  //   document.querySelector('.background img').src = "carousel2012.gif";
-  // }
+  console.log("Screen clicked at:", Date.now());
+
+  await Tone.start();
+
+  clickPlayer.stop();
+  clickPlayer.start();
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  overlay.style.transition = "mask 1s ease, -webkit-mask 1s ease";
+  overlay.style.webkitMaskImage = `radial-gradient(circle 0px at ${x}px ${y}px, transparent 0%, black 100%)`;
+  overlay.style.maskImage = `radial-gradient(circle 0px at ${x}px ${y}px, transparent 0%, black 100%)`;
+
+  requestAnimationFrame(() => {
+    overlay.style.webkitMaskImage = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 70%, black 100%)`;
+    overlay.style.maskImage = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 70%, black 100%)`;
+  });
+});
+
+listenButton.addEventListener("click", async () => {
+  console.log("Listen button clicked at:", Date.now());
+
+  await Tone.start();
+
+  clickPlayer.stop();
+
+  if (!isBgmPlaying) {
+    bgmPlayer.volume.value = -20;
+    bgmPlayer.start();
+    bgmPlayer.volume.rampTo(-6, 2);
+
+    overlay.style.transition = "opacity 2.5s ease";
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+
+    isFullClear = true;
+    isBgmPlaying = true;
+  } else {
+    bgmPlayer.stop();
+    isBgmPlaying = false;
+  }
 });
